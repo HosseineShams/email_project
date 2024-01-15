@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-function Register() {
+function Register({ onRegister }) {
   const [userData, setUserData] = useState({
     username: '',
     password: '',
     email: '',
     national_id: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -25,22 +27,37 @@ function Register() {
         national_id: userData.national_id,
       });
       console.log(response.data);
-      // Handle response
+      onRegister(true);
+      navigate('/upload');
     } catch (error) {
       console.error(error);
-      // Handle error
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="username" onChange={handleChange} />
-      <input type="password" name="password" onChange={handleChange} />
-      <input type="email" name="email" onChange={handleChange} />
-      <input type="text" name="national_id" onChange={handleChange} />
-      <button type="submit">Register</button>
-    </form>
-  );
+    <div className="flex justify-center items-center h-screen">
+      <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <div className="mb-4">
+          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Username" name="username" onChange={handleChange} />
+        </div>
+        <div
+className="mb-4">
+<input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="Password" name="password" onChange={handleChange} />
+</div>
+<div className="mb-4">
+<input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="Email" name="email" onChange={handleChange} />
+</div>
+<div className="mb-4">
+<input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="National ID" name="national_id" onChange={handleChange} />
+</div>
+<div className="flex items-center justify-between">
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+Register
+</button>
+</div>
+</form>
+</div>
+);
 }
 
 export default Register;
