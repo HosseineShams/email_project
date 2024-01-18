@@ -1,3 +1,4 @@
+import Button from '../../components/Button'
 import Input from '../../components/Input'
 import useRegister from './useRegister'
 
@@ -13,31 +14,31 @@ const Register = () => {
           placeholder="Username"
           value={watch('username')}
           onChange={(e) => setValue('username', e.target.value)}
+          label="Username"
         />
         <Input
           type="password"
           placeholder="Password"
           value={watch('password')}
           onChange={(e) => setValue('password', e.target.value)}
+          label="Password"
         />
         <Input
           type="email"
           placeholder="Email"
           value={watch('email')}
           onChange={(e) => setValue('email', e.target.value)}
+          label="Email"
         />
         <Input
           type="text"
           placeholder="National ID"
           value={watch('national_id')}
           onChange={(e) => setValue('national_id', e.target.value)}
+          label="National ID"
         />
         <div className="flex items-center justify-between">
-          <button
-            className="bg-blue-500 hover:bg-blue-700 text-white transition-all duration-500 ease-linear font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit">
-            Register
-          </button>
+          <Button>Register</Button>
         </div>
       </form>
     </div>

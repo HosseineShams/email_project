@@ -21,28 +21,28 @@ const InputComponent: React.FC<InputProps> = ({
   disabled,
   value,
   onChange,
-  type,
+  type = 'text',
   placeholder
 }) => {
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col">
       {label && (
         <label
           htmlFor={id}
-          className="mb-2 text-lg transition duration-500 ease-in-out transform">
+          className="mb-1 text-sm transition-all duration-500 ease-linear transform text-gray-500 focus:text-gray-700">
           {label}
         </label>
       )}
       <input
-        type={type || 'text'}
+        type={type}
         id={id}
         value={value}
         onChange={onChange}
         disabled={disabled}
         placeholder={placeholder}
         className={clsx(
-          'border p-2 transition-all duration-500 ease-in-out',
-          'transform hover:scale-105 focus:border-blue-500',
+          'border border-gray-300 p-2 transition-all duration-500 ease-linear rounded-lg outline-none text-zinc-500 focus:text-gray-900',
+          'focus:border-gray-800',
           disabled ? 'bg-gray-200' : 'bg-white',
           errorText ? 'border-red-500' : 'border-gray-300'
         )}
