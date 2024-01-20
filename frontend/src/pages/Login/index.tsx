@@ -1,29 +1,21 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 
 import ButtonComponent from '../../components/Button'
 import InputComponent from '../../components/Input'
-import useRegister from './useRegister'
+import useLogin from './useLogin'
+import validationSchema from './validation'
 
-// Validation Schema using Yup
-const validationSchema = yup.object().shape({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  national_id: yup.string().required('National ID is required')
-})
+// assuming similar validation schema as Register
 
 type FormData = {
   username: string
   password: string
-  email: string
-  national_id: string
 }
 
-const Register = () => {
-  const { Submit } = useRegister()
+const Login = () => {
+  const { Submit } = useLogin()
 
   const {
     handleSubmit,
@@ -54,28 +46,12 @@ const Register = () => {
           label="Password"
           errorText={errors.password?.message}
         />
-        <InputComponent
-          type="email"
-          placeholder="Email"
-          value={watch('email')}
-          onChange={(e) => setValue('email', e.target.value)}
-          label="Email"
-          errorText={errors.email?.message}
-        />
-        <InputComponent
-          placeholder="National ID"
-          value={watch('national_id')}
-          onChange={(e) => setValue('national_id', e.target.value)}
-          label="National ID"
-          errorText={errors.national_id?.message}
-        />
-
         <div className="w-full flex justify-center">
-          <ButtonComponent>Register</ButtonComponent>
+          <ButtonComponent>Login</ButtonComponent>
         </div>
       </form>
     </div>
   )
 }
 
-export default Register
+export default Login

@@ -20,11 +20,11 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       type={type}
       className={clsx(
-        'px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform',
-        'rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500',
+        'text-white font-bold py-2 px-4 rounded-lg',
+        'transition duration-300 transform',
         disabled
           ? 'bg-gray-400 cursor-not-allowed'
-          : 'bg-blue-500 hover:bg-blue-600 hover:scale-105',
+          : 'bg-purple-600 hover:bg-purple-700 hover:scale-105',
         'disabled:opacity-75'
       )}>
       {children}

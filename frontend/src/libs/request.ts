@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-const API_URL = process.env.REACT_APP_API_URL
+// Hardcoded URL for testing
+const API_URL = 'http://127.0.0.1:8000'
 
 const request = async (
   endpoint: string,
@@ -8,11 +9,21 @@ const request = async (
   body?: any,
   config?: AxiosRequestConfig
 ): Promise<any> => {
-  const response = await axios(API_URL + endpoint, {
-    method: method,
-    data: body,
-    ...config
-  })
-  return response.data
+  try {
+    const response = await axios({
+      url: `${API_URL}${endpoint}`, // Correctly concatenate the API URL and endpoint
+      method: method,
+      data: body,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      ...config
+    })
+    return response.data
+  } catch (error) {
+    console.error('Error in request:', error)
+    throw error
+  }
 }
+
 export default request

@@ -1,17 +1,16 @@
-import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import React, { FC } from 'react'
 
 interface HeaderButtonProps {
   text: string
   url: string
 }
+
 const HeaderButton: FC<HeaderButtonProps> = ({ text, url }) => {
   return (
-    <Link
-      className="hover:text-blue-600 text-blue-300 transition-all duration-500 ease-linear"
-      to={url}>
+    <a href={url} className="text-white hover:text-[#51CFDB]">
       {text}
-    </Link>
+    </a>
   )
 }
+
 export default HeaderButton

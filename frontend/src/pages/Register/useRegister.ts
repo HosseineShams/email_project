@@ -34,7 +34,7 @@ const useRegister = () => {
 
   const Submit = async (fromData: RegisterFormType) => {
     try {
-      const response = await request('users/', 'POST', {
+      const response = await request('/api/users/', 'POST', {
         user: {
           username: fromData.username,
           password: fromData.password,
@@ -44,7 +44,7 @@ const useRegister = () => {
       })
       console.log(response)
       context?.setState(true)
-      navigate('/upload')
+      navigate('/')
     } catch (error) {
       console.error(error)
     }
