@@ -14,6 +14,8 @@ from django.db.utils import IntegrityError
 from rest_framework import status
 import time
 from django.contrib.auth import authenticate, login, logout
+from .tasks import send_emails_task 
+
 
 @api_view(['POST'])
 def user_profile_list(request):
@@ -96,7 +98,6 @@ def file_upload(request):
                 profile.save()
 
         except IntegrityError as e:
-            # If there's an integrity error 
             continue
 
     # Delete the file after processing
@@ -107,26 +108,34 @@ def file_upload(request):
 @api_view(['POST'])
 def send_emails(request):
     template_id = request.data.get('template_id', None)
+    
+    # Check if the email template exists
     email_template = EmailTemplate.objects.filter(pk=template_id).first()
-
     if not email_template:
         return Response({"error": "Email template not found."}, status=status.HTTP_404_NOT_FOUND)
 
-    # Here we will simulate email sending.
-    user_profiles = UserProfile.objects.all()
+    # Create an EmailSendingProgress record to track progress
     progress, created = EmailSendingProgress.objects.get_or_create(template=email_template, defaults={
-        'total_emails': user_profiles.count(),
-        'status': 'In Progress'
+        'total_emails': UserProfile.objects.count(),
+        'status': 'Not Started'
     })
 
-    for profile in user_profiles:
-        print(f"Sending email to {profile.email} with subject: {email_template.subject}")
-        # Simulate email sending delay
-        time.sleep(0.1)  # Remove or adjust this in production
-        progress.emails_sent += 1
+    # Initialize progress values if it's a new record
+    if created:
+        progress.emails_sent = 0
         progress.save()
 
+
+    # For example, if you are sending emails in a loop:
+    for user_profile in UserProfile.objects.all():
+        # Send the email here
+        # Update progress
+        progress.emails_sent += 1
+        progress.status = 'In Progress'
+        progress.save()
+
+    # After sending all emails, mark the progress as completed
     progress.status = 'Completed'
     progress.save()
 
-    return Response({"message": f"Emails have been sent using template '{email_template.subject}'."}, status=status.HTTP_200_OK)
+    return Response({"message": "Email sending initiated."}, status=status.HTTP_200_OK)

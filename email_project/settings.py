@@ -134,3 +134,12 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CELERY_BROKER_URL = 'memory://localhost/'
+
+
+# settings.py
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB limit
+
+

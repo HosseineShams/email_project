@@ -13,5 +13,4 @@ urlpatterns = [
     path('upload/', file_upload, name='file_upload'),
     path('send_emails/', send_emails, name='send_emails'),
     path('api/users/', user_profile_list, name='user-profile-list'),
-    path('send_emails/', send_emails, name='send_emails'),
 ]
