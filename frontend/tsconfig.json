@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["**/*.ts", "**/*.tsx", "postcss.config.js", "*.ts", "tailwind.config.js"],
+  "include": ["**/*.ts", "**/*.tsx", "postcss.config.js", "*.ts", "tailwind.config.js", "src/components/Button/index.tsx"],
   "exclude": ["node_modules"]
 }

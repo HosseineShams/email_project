@@ -1,38 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
-
 import ButtonComponent from '../../components/Button'
 import InputComponent from '../../components/Input'
 import useRegister from './useRegister'
 
-// Validation Schema using Yup
-const validationSchema = yup.object().shape({
-  username: yup.string().required('Username is required'),
-  password: yup.string().required('Password is required'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  national_id: yup.string().required('National ID is required')
-})
-
-type FormData = {
-  username: string
-  password: string
-  email: string
-  national_id: string
-}
-
 const Register = () => {
-  const { Submit } = useRegister()
-
-  const {
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(validationSchema)
-  })
+  const { Submit, handleSubmit, setValue, watch, errors } = useRegister()
 
   return (
     <div className="flex justify-center items-center h-screen">

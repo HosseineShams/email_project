@@ -28,8 +28,6 @@ const useRegister = () => {
     defaultValues
   })
 
-  console.log(errors)
-
   const navigate = useNavigate()
 
   const Submit = async (fromData: RegisterFormType) => {
@@ -44,7 +42,10 @@ const useRegister = () => {
       })
       console.log(response)
       context?.setState(true)
-      navigate('/')
+      sessionStorage.setItem('isLogin', 'true')
+      // Redirect to another page upon successful login
+      navigate('/') // Adjust the route as necessary
+      window.location.reload()
     } catch (error) {
       console.error(error)
     }
@@ -53,7 +54,8 @@ const useRegister = () => {
     Submit,
     handleSubmit,
     setValue,
-    watch
+    watch,
+    errors
   }
 }
 export default useRegister
