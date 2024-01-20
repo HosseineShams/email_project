@@ -34,6 +34,7 @@ const useLogin = () => {
   })
 
   // Define the submit function
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const Submit = async (formData: LoginFormType) => {
     try {
       // API call to the login endpoint
@@ -42,9 +43,11 @@ const useLogin = () => {
 
       // Handle successful login: Update context, store token, etc.
       context?.setState(true) // Adjust this according to your state management logic
+      sessionStorage.setItem('isLogin', 'true')
 
       // Redirect to another page upon successful login
       navigate('/') // Adjust the route as necessary
+      window.location.reload()
     } catch (error) {
       console.error('Login error:', error)
       // Handle login errors (e.g., show an error message)

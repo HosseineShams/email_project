@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import logoImage from '../../assets/logo.png'
 import HeaderButton from './HeaderButton'
@@ -8,6 +9,7 @@ interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ registered }) => {
+  const navigation = useNavigate()
   return (
     <nav className="bg-[#111324] h-20 flex justify-between items-center px-8 lg:px-24">
       {/* Logo and Campaigns Manager Text linked to Home */}
@@ -59,9 +61,14 @@ const Header: FC<HeaderProps> = ({ registered }) => {
 
       {/* Logout Link Styled Similar to Login and Try it free */}
       {registered && (
-        <div className="hidden lg:flex space-x-6 items-center">
+        <div
+          className="hidden lg:flex space-x-6 items-center cursor-pointer"
+          onClick={() => {
+            sessionStorage.removeItem('isLogin')
+            navigation('/login')
+            window.location.reload()
+          }}>
           <a
-            href="/"
             className="px-4 py-3 bg-[#51CFDB] text-[#111324] rounded hover:bg-[#3fa9ad] transition-colors duration-300 text-sm"
             style={{
               fontFamily: '"Graphik Web", Helvetica, sans-serif',

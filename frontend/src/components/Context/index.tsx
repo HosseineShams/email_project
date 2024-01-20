@@ -6,7 +6,9 @@ interface MyProviderProps {
   children: ReactNode
 }
 const MyProvider: FC<MyProviderProps> = ({ children }) => {
-  const [state, setState] = useState<boolean>(false)
+  const [state, setState] = useState<boolean>(
+    !!sessionStorage.getItem('isLogin')
+  )
 
   return (
     <MyContext.Provider value={{ state, setState }}>

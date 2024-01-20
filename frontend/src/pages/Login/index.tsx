@@ -1,30 +1,11 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import React from 'react'
-import { useForm } from 'react-hook-form'
 
 import ButtonComponent from '../../components/Button'
 import InputComponent from '../../components/Input'
 import useLogin from './useLogin'
-import validationSchema from './validation'
-
-// assuming similar validation schema as Register
-
-type FormData = {
-  username: string
-  password: string
-}
 
 const Login = () => {
-  const { Submit } = useLogin()
-
-  const {
-    handleSubmit,
-    setValue,
-    watch,
-    formState: { errors }
-  } = useForm<FormData>({
-    resolver: yupResolver(validationSchema)
-  })
+  const { Submit, errors, handleSubmit, setValue, watch } = useLogin()
 
   return (
     <div className="flex justify-center items-center h-screen">

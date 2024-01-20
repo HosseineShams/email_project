@@ -8,6 +8,7 @@ import UnRegisteredRoutes from './UnRegisteredRoutes'
 
 const Routes = () => {
   const context = useContext(MyContext)
+  console.log(context?.state)
 
   return (
     <Router>
